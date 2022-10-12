@@ -25,11 +25,13 @@ namespace MusicPlayer
     {
         private AudioFileReader audioFile;
         private WaveOutEvent outputDevice;
+        private bool playing;
 
         public MainWindow()
         {
             InitializeComponent();
             outputDevice = new WaveOutEvent();
+            playing = false;
         }
 
         //Allows user to select a song to play from their files
@@ -47,27 +49,59 @@ namespace MusicPlayer
             // Display OpenFileDialog by calling ShowDialog method 
             bool? result = dlg.ShowDialog();
 
-            // Get the selected file name and display in a TextBlock 
+            // Get the selected file and display song name in a TextBlock 
             if (result == true)
             {
                 // Open file
                 string filename = dlg.FileName;
-                FilenameTextBlock.Text = filename;
-                PlaySong(filename);
+                TagLib.File tfile = TagLib.File.Create(@filename);
+                string songTitle = tfile.Tag.Title;
+
+                if(songTitle != null)
+                {
+                    FilenameTextBlock.Text = songTitle;
+                }
+                else
+                {
+                    FilenameTextBlock.Text = filename;
+                }
+
+                if(audioFile != null)
+                {
+                    outputDevice.Stop();
+                    PlayButton.Content = "Play";
+                    playing = false;
+                }
+
+                audioFile = new AudioFileReader(filename);
+                outputDevice.Init(audioFile);
             }
         }
 
-        //Stops the current song and plays a new one
-        private void PlaySong(string filename)
+        //Plays and pauses the currently playing song
+        private void PlayPause(object sender, EventArgs e)
         {
-            if(audioFile != null)
+            //If no song is loaded, do nothing
+            if(audioFile == null)
             {
-                outputDevice.Stop();
+                return;
             }
 
-            audioFile = new AudioFileReader(filename);
-            outputDevice.Init(audioFile);
-            outputDevice.Play();
+            //Otherwise, play or pause the music
+            if(playing == false)
+            {
+                //Play
+                outputDevice.Play();
+                PlayButton.Content = "Pause";
+                playing = true;
+            }
+            else
+            {
+                //Pause
+                outputDevice.Pause();
+                PlayButton.Content = "Play";
+                playing = false;
+            }
         }
     }
 }

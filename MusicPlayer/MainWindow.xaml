@@ -15,6 +15,10 @@
 			<TextBlock x:Name="FilenameTextBlock" HorizontalAlignment="Center" FontSize="32" Width="Auto">
 				Ayo!
 			</TextBlock>
+            <Button x:Name="PlayButton" Click = "PlayPause" Height="50" Width="75" HorizontalAlignment="Center">
+                <Button.FontStyle>Italic</Button.FontStyle>
+                <Button.Content>Play</Button.Content>
+            </Button>
 		</StackPanel>
 	</Grid>
 </Window>
