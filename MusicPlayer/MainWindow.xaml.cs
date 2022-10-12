@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
+using System.Diagnostics;
+using NAudio.Wave;
+using System.Drawing;
+using System.IO;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Diagnostics;
-using NAudio;
-using NAudio.Wave;
 
 namespace MusicPlayer
 {
@@ -54,10 +45,43 @@ namespace MusicPlayer
             {
                 // Open file
                 string filename = dlg.FileName;
+                //Extract metadata
+                //Song title
                 TagLib.File tfile = TagLib.File.Create(@filename);
                 string songTitle = tfile.Tag.Title;
+                //Album Art
+                bool picFound = false;
 
-                if(songTitle != null)
+                //Try to find album art
+                foreach (TagLib.IPicture pic in tfile.Tag.Pictures)
+                {
+                    //If found, display
+                    if (pic != null)
+                    {
+                        try
+                        {
+                            MemoryStream ms = new MemoryStream(pic.Data.Data);
+                            BitmapImage imageSource = new BitmapImage();
+                            imageSource.BeginInit();
+                            imageSource.StreamSource = ms;
+                            imageSource.EndInit();
+                            AlbumArt.Source = imageSource;
+                            picFound = true;
+                            break;
+                        }
+                        catch(NotSupportedException)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                //Otherwise, display default image
+                if(!picFound)
+                {
+                    AlbumArt.Source = new BitmapImage(new Uri("default.png",UriKind.Relative));
+                }
+
+                if (songTitle != null)
                 {
                     FilenameTextBlock.Text = songTitle;
                 }

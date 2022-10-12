@@ -12,6 +12,7 @@
 				<Button.FontWeight>Bold</Button.FontWeight>
 				<Button.Content>Select File</Button.Content>
 			</Button>
+            <Image x:Name="AlbumArt" Height="150" Width="150"></Image>
 			<TextBlock x:Name="FilenameTextBlock" HorizontalAlignment="Center" FontSize="32" Width="Auto">
 				Ayo!
 			</TextBlock>
