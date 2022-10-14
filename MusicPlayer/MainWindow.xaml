@@ -7,19 +7,33 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 	<Grid>
-		<StackPanel Width="Auto" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Center">
-			<Button x:Name="SelectFileButton" Click="SelectFile" Height="50" Width="75" HorizontalAlignment="Center">
-				<Button.FontWeight>Bold</Button.FontWeight>
-				<Button.Content>Select File</Button.Content>
-			</Button>
-            <Image x:Name="AlbumArt" Height="150" Width="150"></Image>
-			<TextBlock x:Name="FilenameTextBlock" HorizontalAlignment="Center" FontSize="32" Width="Auto">
-				Ayo!
-			</TextBlock>
-            <Button x:Name="PlayButton" Click = "PlayPause" Height="50" Width="75" HorizontalAlignment="Center">
-                <Button.FontStyle>Italic</Button.FontStyle>
-                <Button.Content>Play</Button.Content>
+		<StackPanel x:Name="StackPanel" Width="Auto" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <!-- Select files -->
+            <Button x:Name="SelectFileButton" Click="SelectFile" Height="50" Width="75" HorizontalAlignment="Center" Margin="0,0,0,5">
+                <Button.FontWeight>Bold</Button.FontWeight>
+                <Button.Content>Select File</Button.Content>
             </Button>
-		</StackPanel>
+
+            <!-- Album Art -->
+            <Border BorderThickness="3" BorderBrush="Black" Width="150" Height="150" CornerRadius="1" Margin="0,0,0,5">
+                <Image x:Name="AlbumArt" Height="150" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center"></Image>
+            </Border>
+
+            <!-- Song Metadata -->
+            <TextBlock x:Name="SongName" HorizontalAlignment="Center" FontSize="16" Width="Auto" Text=""/>
+            <TextBlock x:Name="ArtistName" HorizontalAlignment="Center" FontSize="16" Width="Auto" Text=""/>
+            <TextBlock x:Name="AlbumName" HorizontalAlignment="Center" FontSize="16" Width="Auto" Text=""/>
+
+            <!-- Playback Controls -->
+            <StackPanel x:Name="PlaybackControlsPanel" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!-- Progress Slider -->
+                <Slider x:Name="ProgressSlider" Width="150" Minimum="0" ></Slider>
+                <!-- Play/Pause Button -->
+                <Button x:Name="PlayButton" Click = "PlayPause" Height="50" Width="50" HorizontalAlignment="Center">
+                    <Button.FontStyle>Italic</Button.FontStyle>
+                    <Button.Content>Play</Button.Content>
+                </Button>
+            </StackPanel>
+        </StackPanel>
 	</Grid>
 </Window>
