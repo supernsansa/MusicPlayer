@@ -7,14 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="images\default.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="NAudio" Version="2.1.0" />
     <PackageReference Include="TagLibSharp" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="images\default.png">
+    <Resource Include="images\default.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Resource>
   </ItemGroup>
 
 </Project>

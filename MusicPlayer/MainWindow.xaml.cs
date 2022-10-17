@@ -91,7 +91,7 @@ namespace MusicPlayer
                 //Otherwise, display default image
                 if(!picFound)
                 {
-                    AlbumArt.Source = new BitmapImage(new Uri("default.png",UriKind.Relative));
+                    AlbumArt.Source = new BitmapImage(new Uri("/images/default.png", UriKind.Relative));
                 }
 
                 //Set song title text
@@ -100,11 +100,12 @@ namespace MusicPlayer
                 else
                 { SongName.Text = filename; }
 
-                //Set song artist text
+                /** Set song artist text
                 if (artists != null)
                 { ArtistName.Text = artists; }
                 else 
                 { ArtistName.Text = "Unknown"; }
+                */
 
                 //Set album text
                 if (albumTitle != null)
