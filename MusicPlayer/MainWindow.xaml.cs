@@ -110,7 +110,8 @@ namespace MusicPlayer
                 if (albumTitle != null)
                 { AlbumName.Text = albumTitle; }
                 else
-                {  AlbumName.Text = "Unknown"; }
+                { AlbumName.Text = "Unknown"; }
+                
 
                 //If a song is already loaded, stop it and reset play/pause button
                 if (audioFile != null)
