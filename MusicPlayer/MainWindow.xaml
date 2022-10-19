@@ -5,15 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800"
+        Title="Music Player" Height="600" Width="800"
         MinHeight="600" MinWidth="800"
         SizeToContent="WidthAndHeight">
     <Grid x:Name="mainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="90*" />
-            <RowDefinition Height="15*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="80*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid x:Name="bottomBar" Width="Auto" Height="Auto" VerticalAlignment="Bottom" Grid.Row="1">
+        
+        <Menu Grid.Row="0">
+            <MenuItem Header="Manage Library"/>
+        </Menu>
+        
+        <Grid x:Name="bottomBar" Width="Auto" Height="Auto" VerticalAlignment="Bottom" Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="80*" />
@@ -21,18 +27,21 @@
             </Grid.ColumnDefinitions>
 
             <!-- Album Art -->
-            <Image x:Name="AlbumArt" Grid.Column="0" Height="Auto" Width="Auto" VerticalAlignment="Bottom" HorizontalAlignment="Left" Source="/images/default.png"/>
-
+            <Image x:Name="AlbumArt" Grid.Column="0" MaxHeight="{Binding ActualHeight, ElementName=PlaybackControlsPanel, Mode=OneWay}" 
+                   MaxWidth="{Binding ActualHeight, ElementName=PlaybackControlsPanel, Mode=OneWay}" VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+                   Source="/images/default.png"/>
+            
             <!-- Playback Controls -->
-            <StackPanel x:Name="PlaybackControlsPanel" Height="Auto" Width="Auto" Orientation="Vertical" HorizontalAlignment="Stretch"  VerticalAlignment="Center" Grid.Column="1" Margin="5,0,0,5" MaxHeight="150">
+            <StackPanel x:Name="PlaybackControlsPanel" Height="Auto" Width="Auto" Orientation="Vertical" HorizontalAlignment="Stretch"  VerticalAlignment="Bottom" Grid.Column="1" Margin="5,0,0,0" MaxHeight="150">
+                <StackPanel Height="Auto" Width="Auto" Orientation="Horizontal"></StackPanel>
                 <!-- Song Metadata -->
-                <TextBlock x:Name="SongName" HorizontalAlignment="Left" FontSize="14" Height="Auto" Width="Auto" Text="Placeholder" Margin="5,0,0,1"/>
-                <TextBlock x:Name="AlbumName" HorizontalAlignment="Left" FontSize="10" Height="Auto" Width="Auto" Text="Placeholder" Margin="5,0,0,1"/>
-                <!-- TextBlock x:Name="ArtistName" HorizontalAlignment="Left" FontSize="10" Height="Auto" Width="Auto" Text="Placeholder" Margin="5,0,0,5"/ -->
+                <TextBlock x:Name="SongName" HorizontalAlignment="Left"  FontSize="14" Height="Auto" Width="Auto" Text="Placeholder" Margin="5,0,0,1" FontFamily="Consolas"/>
+                <TextBlock x:Name="AlbumName" HorizontalAlignment="Left" FontSize="10" Height="Auto" Width="Auto" Text="Placeholder" Margin="5,0,0,1" FontFamily="Consolas"/>
+                <TextBlock x:Name="ArtistName" HorizontalAlignment="Left" FontSize="10" Height="Auto" Width="Auto" Text="Placeholder" Margin="5,0,0,1" FontFamily="Consolas"/>
                 <!-- Progress Slider -->
                 <Slider x:Name="ProgressSlider" Minimum="0" Margin="0,0,5,0"/>
                 <!-- Play/Pause Button -->
-                <Button x:Name="PlayButton" Click = "PlayPause" Height="Auto" MaxWidth="50" Margin="0,2,0,0">
+                <Button x:Name="PlayButton" Click = "PlayPause" Height="Auto" MaxWidth="50" Margin="0,0,0,5">
                     <Button.FontStyle>Italic</Button.FontStyle>
                     <Button.Content>Play</Button.Content>
                 </Button>

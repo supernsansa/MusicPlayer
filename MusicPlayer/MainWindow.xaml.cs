@@ -100,12 +100,11 @@ namespace MusicPlayer
                 else
                 { SongName.Text = filename; }
 
-                /** Set song artist text
+                //Set song artist text
                 if (artists != null)
                 { ArtistName.Text = artists; }
                 else 
                 { ArtistName.Text = "Unknown"; }
-                */
 
                 //Set album text
                 if (albumTitle != null)
